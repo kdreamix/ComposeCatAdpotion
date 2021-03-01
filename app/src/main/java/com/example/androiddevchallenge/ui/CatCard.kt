@@ -16,6 +16,7 @@
 package com.example.androiddevchallenge.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -30,12 +31,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.models.Abyssinian
 import com.example.androiddevchallenge.models.CatModel
+import com.example.androiddevchallenge.ui.theme.typography
 
 @Preview("Cat card")
 @Composable
@@ -45,30 +48,41 @@ fun CatCard(
         catBreed = Abyssinian,
         id = "",
         catName = "Bobby"
-    )
+    ),
+    onClick: () -> Unit = {},
 ) {
-    Card(elevation = 12.dp) {
-        Row(modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth(),
+    Card(
+        elevation = 12.dp,
+        modifier = Modifier.clickable {
+            onClick()
+        }
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
                 painter = painterResource(catModel.catBreed.imageRes),
                 contentDescription = null,
                 modifier = Modifier
-                    .height(60.dp)
-                    .width(60.dp)
+                    .height(48.dp)
+                    .width(48.dp)
                     .clip(shape = CircleShape),
                 contentScale = ContentScale.Crop,
             )
             Spacer(Modifier.width(16.dp))
             Column {
-                Text(text = catModel.catName)
-                Text(text = catModel.catBreed.breedName)
-                Text(text = catModel.catBreed.breedType.string)
-                Text(text = catModel.catBreed.coatLength.string)
-                Text(text = catModel.catBreed.coatPattern.string)
+                Text(text = catModel.catName, style = typography.h6)
+                Text(
+                    text = "Breed: ${catModel.catBreed.breedName}",
+                    style = typography.body1,
+                    color = Color.Gray
+                )
+                // Text(text = catModel.catBreed.breedType.string)
+                // Text(text = catModel.catBreed.coatLength.string)
+                // Text(text = catModel.catBreed.coatPattern.string)
             }
         }
     }

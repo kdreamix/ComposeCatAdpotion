@@ -21,12 +21,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.androiddevchallenge.ui.CatList
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.androiddevchallenge.routing.RouteCatDetail
+import com.example.androiddevchallenge.routing.RouteCatList
+import com.example.androiddevchallenge.routing.Routing
+import com.example.androiddevchallenge.ui.CatDetailScaffold
+import com.example.androiddevchallenge.ui.CatScaffold
 import com.example.androiddevchallenge.ui.theme.MyTheme
-import com.example.androiddevchallenge.viewmodels.CatListViewModel
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,9 +47,13 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
-        val catListViewModel = viewModel<CatListViewModel>()
-        val catListState = catListViewModel.catList.collectAsState()
-        CatList(list = catListState.value)
+        val navController = rememberNavController()
+        NavHost(navController, startDestination = RouteCatList.id) {
+            composable(RouteCatList.id) { CatScaffold(navController) }
+            composable(RouteCatDetail.id) {
+                CatDetailScaffold(it.arguments?.getString(Routing.PARAM_CAT_ID)?:"")
+            }
+        }
     }
 }
 

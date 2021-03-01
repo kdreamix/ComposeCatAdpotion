@@ -22,25 +22,34 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.navigate
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.models.Abyssinian
 import com.example.androiddevchallenge.models.CatModel
+import com.example.androiddevchallenge.routing.RouteCatDetail
 
 @Preview
 @Composable
-fun CatList(list: List<CatModel> = listOf(
-    CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
-    CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
-    CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
-    CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
-    CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
-)) {
+fun CatList(
+    list: List<CatModel> = listOf(
+        CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
+        CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
+        CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
+        CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
+        CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
+    ),
+    navController: NavController? = null,
+) {
+
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
-        ) {
+    ) {
         items(list) { catModel ->
-            CatCard(catModel = catModel)
+            CatCard(catModel = catModel, onClick = {
+                navController?.navigate(RouteCatDetail.id.format(catModel.id))
+            })
         }
     }
 }

@@ -16,7 +16,6 @@
 package com.example.androiddevchallenge.models
 
 import com.example.androiddevchallenge.R
-import java.util.UUID
 
 data class CatModel(
     val id: String,

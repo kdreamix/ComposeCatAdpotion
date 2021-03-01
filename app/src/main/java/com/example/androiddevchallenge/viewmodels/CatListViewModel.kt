@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 class CatListViewModel : ViewModel() {
     private val value = listOf(
-        CatModel(id ="1", catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
+        CatModel(id = "1", catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
         CatModel(id = "2", catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
         CatModel(id = "3", catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
     )
@@ -32,7 +32,7 @@ class CatListViewModel : ViewModel() {
         value
     )
 
-     fun getCatById(id: String): CatModel? {
+    fun getCatById(id: String): CatModel? {
         return value.firstOrNull { it.id == id }
     }
 }

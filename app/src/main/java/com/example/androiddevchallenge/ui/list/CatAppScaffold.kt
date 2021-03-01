@@ -16,7 +16,6 @@
 package com.example.androiddevchallenge.ui.list
 
 import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -25,6 +24,8 @@ import androidx.compose.material.BottomAppBar
 import androidx.compose.material.DrawerValue
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Snackbar
@@ -40,14 +41,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.androiddevchallenge.R
-import com.example.androiddevchallenge.ui.theme.topBarColor
+import com.example.androiddevchallenge.ui.theme.BrightYellow
+import com.example.androiddevchallenge.ui.theme.DarkBlack
 import com.example.androiddevchallenge.viewmodels.CatListViewModel
 import kotlinx.coroutines.launch
 
@@ -71,18 +72,18 @@ fun CatScaffold(navController: NavController? = null) {
     )
 }
 
+@Preview("Cat top bar")
 @Composable
 fun CatTopBar() {
     TopAppBar(
         title = { Text("Top AppBar") },
-        backgroundColor = topBarColor,
     )
 }
 
+@Preview("Cat bottom bar")
 @Composable
-fun CatBottomBar(fabShape: CutCornerShape) {
+fun CatBottomBar(fabShape: CutCornerShape = CutCornerShape(16.dp)) {
     BottomAppBar(
-        backgroundColor = topBarColor,
         cutoutShape = fabShape
     ) {
         Text("BottomAppBar")
@@ -122,14 +123,18 @@ fun CatFloatingActionButton(scaffoldState: ScaffoldState, fabShape: CutCornerSha
             }
         }
     ) {
-        Image(
+        Icon(
             painter = painterResource(R.drawable.cat_fab),
             contentDescription = null,
+            tint = if (MaterialTheme.colors.isLight) {
+                BrightYellow
+            } else {
+                DarkBlack
+            },
             modifier = Modifier
                 .padding(12.dp)
                 .height(40.dp)
                 .width(40.dp),
-            contentScale = ContentScale.Crop,
         )
     }
 }

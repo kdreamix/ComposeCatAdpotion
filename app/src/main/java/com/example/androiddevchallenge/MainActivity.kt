@@ -18,16 +18,15 @@ package com.example.androiddevchallenge
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.androiddevchallenge.models.CatModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.androiddevchallenge.ui.CatList
 import com.example.androiddevchallenge.ui.theme.MyTheme
+import com.example.androiddevchallenge.viewmodels.CatListViewModel
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,11 +43,9 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
-        LazyColumn {
-            items(5) {
-                CatCard(catModel = CatModel.defaultCat)
-            }
-        }
+        val catListViewModel = viewModel<CatListViewModel>()
+        val catListState = catListViewModel.catList.collectAsState()
+        CatList(list = catListState.value)
     }
 }
 
@@ -65,12 +62,5 @@ fun LightPreview() {
 fun DarkPreview() {
     MyTheme(darkTheme = true) {
         MyApp()
-    }
-}
-
-@Composable
-fun CatCard(catModel: CatModel) {
-    Card(elevation = 12.dp) {
-        Text(text = catModel.catName)
     }
 }

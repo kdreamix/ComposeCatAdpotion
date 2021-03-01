@@ -68,7 +68,6 @@ fun DarkPreview() {
     }
 }
 
-@Preview
 @Composable
 fun CatCard(catModel: CatModel) {
     Card(elevation = 12.dp) {

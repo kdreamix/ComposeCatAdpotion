@@ -15,13 +15,11 @@
  */
 package com.example.androiddevchallenge.ui.list
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,8 +29,6 @@ import androidx.navigation.compose.navigate
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.models.Abyssinian
 import com.example.androiddevchallenge.models.CatModel
-import com.example.androiddevchallenge.ui.theme.BrightYellow
-import com.example.androiddevchallenge.ui.theme.DarkBlack
 
 @Preview
 @Composable
@@ -46,13 +42,8 @@ fun CatList(
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
-        modifier = Modifier.background(
-            if (MaterialTheme.colors.isLight) {
-                BrightYellow
-            } else {
-                DarkBlack
-            }
-        ).fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
     ) {
         items(list) { catModel ->
             CatCard(

@@ -16,16 +16,14 @@
 package com.example.androiddevchallenge.ui.detail
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -37,8 +35,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.models.Abyssinian
 import com.example.androiddevchallenge.models.CatModel
-import com.example.androiddevchallenge.ui.theme.BrightYellow
-import com.example.androiddevchallenge.ui.theme.DarkBlack
 import com.example.androiddevchallenge.ui.theme.typography
 
 @Preview("Cat Detail")
@@ -53,16 +49,8 @@ fun CatDetail(
 ) {
     Column(
         modifier = Modifier
-            .background(
-                if (MaterialTheme.colors.isLight) {
-                    BrightYellow
-                } else {
-                    DarkBlack
-                }
-            )
             .padding(16.dp)
-            .fillMaxWidth()
-            .fillMaxHeight(),
+            .fillMaxSize(),
     ) {
         Image(
             painter = painterResource(catModel.catBreed.imageRes),

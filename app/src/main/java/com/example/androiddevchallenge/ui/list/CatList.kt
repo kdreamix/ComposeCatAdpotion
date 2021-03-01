@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui
+package com.example.androiddevchallenge.ui.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -27,21 +27,16 @@ import androidx.navigation.compose.navigate
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.models.Abyssinian
 import com.example.androiddevchallenge.models.CatModel
-import com.example.androiddevchallenge.routing.RouteCatDetail
 
 @Preview
 @Composable
 fun CatList(
     list: List<CatModel> = listOf(
-        CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
-        CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
-        CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
-        CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
-        CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
+        CatModel(id = "1", catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
+        CatModel(id = "2", catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
     ),
     navController: NavController? = null,
 ) {
-
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -50,7 +45,7 @@ fun CatList(
             CatCard(
                 catModel = catModel,
                 onClick = {
-                    navController?.navigate(RouteCatDetail.id.format(catModel.id))
+                    navController?.navigate("detail/${catModel.id}")
                 }
             )
         }

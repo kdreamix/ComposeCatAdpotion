@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui
+package com.example.androiddevchallenge.ui.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -80,9 +80,6 @@ fun CatCard(
                     style = typography.body1,
                     color = Color.Gray
                 )
-                // Text(text = catModel.catBreed.breedType.string)
-                // Text(text = catModel.catBreed.coatLength.string)
-                // Text(text = catModel.catBreed.coatPattern.string)
             }
         }
     }

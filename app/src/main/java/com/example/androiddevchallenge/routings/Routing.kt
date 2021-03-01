@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui
+package com.example.androiddevchallenge.routings
 
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-
-@Composable
-fun CatDetailScaffold(string: String) {
-    Text("")
+sealed class Routing(val id: String) {
+    companion object {
+        const val PARAM_CAT_ID = "catId"
+    }
 }
+
+object RouteCatList : Routing("list")
+object RouteCatDetail : Routing("detail/{catId}")

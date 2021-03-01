@@ -19,7 +19,7 @@ import com.example.androiddevchallenge.R
 import java.util.UUID
 
 data class CatModel(
-    val id: String = UUID.randomUUID().toString(),
+    val id: String,
     val catName: String,
     val catBreed: CatBreed,
     val catImage: Int,

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui
+package com.example.androiddevchallenge.ui.detail
 
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.material.BottomAppBar
 import androidx.compose.material.DrawerValue
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
@@ -36,7 +35,6 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberDrawerState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -45,7 +43,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ui.theme.topBarColor
 import com.example.androiddevchallenge.viewmodels.CatListViewModel
@@ -53,7 +50,7 @@ import kotlinx.coroutines.launch
 
 @Preview("Cat Scaffold")
 @Composable
-fun CatScaffold(navController: NavController? = null) {
+fun CatDetailScaffold(catId: String = "") {
     val scaffoldState = rememberScaffoldState(
         rememberDrawerState(DrawerValue.Closed)
     )
@@ -61,18 +58,22 @@ fun CatScaffold(navController: NavController? = null) {
 
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar = { CatTopBar() },
-        bottomBar = { CatBottomBar(fabShape) },
-        snackbarHost = { state -> CatSnackBarHost(state) },
+        topBar = { CatDetailTopBar() },
+        snackbarHost = { state -> CatDetailSnackBarHost(state) },
         isFloatingActionButtonDocked = true,
-        floatingActionButtonPosition = FabPosition.Center,
-        floatingActionButton = { CatFloatingActionButton(scaffoldState, fabShape) },
-        content = { CatContent(navController) },
+        floatingActionButtonPosition = FabPosition.End,
+        floatingActionButton = {
+            CatDetailFloatingActionButton(
+                scaffoldState,
+                fabShape
+            )
+        },
+        content = { CatDetailContent(catId) },
     )
 }
 
 @Composable
-fun CatTopBar() {
+fun CatDetailTopBar() {
     TopAppBar(
         title = { Text("Top AppBar") },
         backgroundColor = topBarColor,
@@ -80,17 +81,7 @@ fun CatTopBar() {
 }
 
 @Composable
-fun CatBottomBar(fabShape: CutCornerShape) {
-    BottomAppBar(
-        backgroundColor = topBarColor,
-        cutoutShape = fabShape
-    ) {
-        Text("BottomAppBar")
-    }
-}
-
-@Composable
-fun CatSnackBarHost(state: SnackbarHostState) {
+fun CatDetailSnackBarHost(state: SnackbarHostState) {
     SnackbarHost(
         state,
         snackbar = { data ->
@@ -104,7 +95,7 @@ fun CatSnackBarHost(state: SnackbarHostState) {
 }
 
 @Composable
-fun CatFloatingActionButton(scaffoldState: ScaffoldState, fabShape: CutCornerShape) {
+fun CatDetailFloatingActionButton(scaffoldState: ScaffoldState, fabShape: CutCornerShape) {
     val scope = rememberCoroutineScope()
     FloatingActionButton(
         shape = fabShape,
@@ -135,8 +126,10 @@ fun CatFloatingActionButton(scaffoldState: ScaffoldState, fabShape: CutCornerSha
 }
 
 @Composable
-fun CatContent(navController: NavController?) {
+fun CatDetailContent(catId: String) {
     val catListViewModel = viewModel<CatListViewModel>()
-    val catListState = catListViewModel.catList.collectAsState()
-    CatList(list = catListState.value, navController)
+    val cat = catListViewModel.getCatById(catId)
+    Log.v("CatDetailContent", catId)
+    Log.v("CatDetailContent", cat.toString())
+    CatDetail(catModel = cat!!)
 }

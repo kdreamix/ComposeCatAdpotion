@@ -25,11 +25,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.androiddevchallenge.routing.RouteCatDetail
-import com.example.androiddevchallenge.routing.RouteCatList
-import com.example.androiddevchallenge.routing.Routing
-import com.example.androiddevchallenge.ui.CatDetailScaffold
-import com.example.androiddevchallenge.ui.CatScaffold
+import com.example.androiddevchallenge.routings.RouteCatDetail
+import com.example.androiddevchallenge.routings.RouteCatList
+import com.example.androiddevchallenge.routings.Routing
+import com.example.androiddevchallenge.ui.detail.CatDetailScaffold
+import com.example.androiddevchallenge.ui.list.CatScaffold
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {

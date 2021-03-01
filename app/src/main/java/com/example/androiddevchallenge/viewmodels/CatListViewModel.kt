@@ -23,13 +23,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class CatListViewModel : ViewModel() {
-    val catList: StateFlow<List<CatModel>> = MutableStateFlow(
-        listOf(
-            CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
-            CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
-            CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
-            CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
-            CatModel(catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
-        )
+    private val value = listOf(
+        CatModel(id ="1", catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
+        CatModel(id = "2", catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
+        CatModel(id = "3", catName = "Bobby", catBreed = Abyssinian, catImage = R.drawable.img_abyssinian),
     )
+    val catList: StateFlow<List<CatModel>> = MutableStateFlow(
+        value
+    )
+
+     fun getCatById(id: String): CatModel? {
+        return value.firstOrNull { it.id == id }
+    }
 }

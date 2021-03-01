@@ -47,9 +47,12 @@ fun CatList(
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         items(list) { catModel ->
-            CatCard(catModel = catModel, onClick = {
-                navController?.navigate(RouteCatDetail.id.format(catModel.id))
-            })
+            CatCard(
+                catModel = catModel,
+                onClick = {
+                    navController?.navigate(RouteCatDetail.id.format(catModel.id))
+                }
+            )
         }
     }
 }

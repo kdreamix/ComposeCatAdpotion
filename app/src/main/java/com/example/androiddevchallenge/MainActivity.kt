@@ -51,7 +51,10 @@ fun MyApp() {
         NavHost(navController, startDestination = RouteCatList.id) {
             composable(RouteCatList.id) { CatScaffold(navController) }
             composable(RouteCatDetail.id) {
-                CatDetailScaffold(it.arguments?.getString(Routing.PARAM_CAT_ID) ?: "")
+                CatDetailScaffold(
+                    it.arguments?.getString(Routing.PARAM_CAT_ID) ?: "",
+                    navController
+                )
             }
         }
     }

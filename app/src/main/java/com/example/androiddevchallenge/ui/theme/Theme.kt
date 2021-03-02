@@ -44,12 +44,14 @@ import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
     primary = DarkBlack,
+    primaryVariant = DarkBlackVariant,
     secondary = DarkYellow,
     background = DarkBlack,
     // surface = DarkBlack,
 )
 private val LightColorPalette = lightColors(
     primary = BrightYellow,
+    primaryVariant = BrightYellowVariant,
     secondary = BrightBlack,
     background = BrightYellow,
     // surface = BrightYellow,
@@ -67,6 +69,7 @@ fun MyTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() (
         colors = colors,
         typography = typography,
         shapes = shapes,
-        content = content
+        content = content,
+
     )
 }

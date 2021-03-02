@@ -19,5 +19,7 @@ import androidx.compose.ui.graphics.Color
 
 val DarkYellow = Color(0xffffeb46)
 val BrightYellow = Color(0xFAFFE723)
+val BrightYellowVariant = Color(0xFFB3A113)
 val DarkBlack = Color(0xFF22211F)
+val DarkBlackVariant = Color(0xFF363532)
 val BrightBlack = Color(0xFF1D1D1B)

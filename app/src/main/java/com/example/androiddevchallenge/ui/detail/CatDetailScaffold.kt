@@ -24,6 +24,7 @@ import androidx.compose.material.DrawerValue
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
@@ -33,25 +34,25 @@ import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.SnackbarResult
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.rememberDrawerState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.androiddevchallenge.R
 import com.example.androiddevchallenge.ui.theme.BrightYellow
 import com.example.androiddevchallenge.ui.theme.DarkBlack
 import com.example.androiddevchallenge.viewmodels.CatListViewModel
 import kotlinx.coroutines.launch
 
-@Preview("Cat Scaffold")
 @Composable
-fun CatDetailScaffold(catId: String = "") {
+fun CatDetailScaffold(catId: String = "", navController: NavController) {
     val scaffoldState = rememberScaffoldState(
         rememberDrawerState(DrawerValue.Closed)
     )
@@ -59,7 +60,7 @@ fun CatDetailScaffold(catId: String = "") {
 
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar = { CatDetailTopBar() },
+        topBar = { CatDetailTopBar(catId, navController) },
         snackbarHost = { state -> CatDetailSnackBarHost(state) },
         isFloatingActionButtonDocked = true,
         floatingActionButtonPosition = FabPosition.End,
@@ -74,9 +75,24 @@ fun CatDetailScaffold(catId: String = "") {
 }
 
 @Composable
-fun CatDetailTopBar() {
+fun CatDetailTopBar(catId: String, navController: NavController) {
+    val catListViewModel = viewModel<CatListViewModel>()
+    val cat = catListViewModel.getCatById(catId)
+
     TopAppBar(
-        title = { Text("Top AppBar") },
+        title = { Text(cat!!.catName, color = DarkBlack) },
+        navigationIcon = {
+            IconButton(onClick = {
+                navController.popBackStack()
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = null,
+                    tint = DarkBlack
+                )
+            }
+        },
+        elevation = 0.dp
     )
 }
 
@@ -87,8 +103,6 @@ fun CatDetailSnackBarHost(state: SnackbarHostState) {
         snackbar = { data ->
             Snackbar(
                 data,
-                backgroundColor = Color(0x99000000),
-                elevation = 1.dp
             )
         }
     )
@@ -103,8 +117,7 @@ fun CatDetailFloatingActionButton(scaffoldState: ScaffoldState, fabShape: CutCor
             scope.launch {
                 when (
                     scaffoldState.snackbarHostState.showSnackbar(
-                        message = "Snackbar",
-                        actionLabel = "Ok"
+                        message = "Meow",
                     )
                 ) {
                     SnackbarResult.Dismissed -> Log.d("Track", "Dismissed")

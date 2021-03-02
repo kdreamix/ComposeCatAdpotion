@@ -9,7 +9,7 @@
 A simple cat adoption app.
 
 ## :bulb: Motivation and Context
-First compose app, surprised by how easily to get things done
+First compose app, surprised by how easily to get things done.
 
 
 ## :camera_flash: Screenshots

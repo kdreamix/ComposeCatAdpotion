@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui.theme
+package com.example.androiddevchallenge.routings
 
-import androidx.compose.ui.graphics.Color
+sealed class Routing(val id: String) {
+    companion object {
+        const val PARAM_CAT_ID = "catId"
+    }
+}
 
-val DarkYellow = Color(0xffffeb46)
-val BrightYellow = Color(0xFAFFE723)
-val BrightYellowVariant = Color(0xFFB3A113)
-val DarkBlack = Color(0xFF22211F)
-val DarkBlackVariant = Color(0xFF363532)
-val BrightBlack = Color(0xFF1D1D1B)
+object RouteCatList : Routing("list")
+object RouteCatDetail : Routing("detail/{$PARAM_CAT_ID}")

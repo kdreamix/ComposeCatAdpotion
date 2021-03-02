@@ -18,15 +18,18 @@ package com.example.androiddevchallenge
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.androiddevchallenge.models.CatModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.androiddevchallenge.routings.RouteCatDetail
+import com.example.androiddevchallenge.routings.RouteCatList
+import com.example.androiddevchallenge.routings.Routing
+import com.example.androiddevchallenge.ui.detail.CatDetailScaffold
+import com.example.androiddevchallenge.ui.list.CatScaffold
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
@@ -44,9 +47,14 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
-        LazyColumn {
-            items(5) {
-                CatCard(catModel = CatModel.defaultCat)
+        val navController = rememberNavController()
+        NavHost(navController, startDestination = RouteCatList.id) {
+            composable(RouteCatList.id) { CatScaffold(navController) }
+            composable(RouteCatDetail.id) {
+                CatDetailScaffold(
+                    it.arguments?.getString(Routing.PARAM_CAT_ID) ?: "",
+                    navController
+                )
             }
         }
     }
@@ -65,12 +73,5 @@ fun LightPreview() {
 fun DarkPreview() {
     MyTheme(darkTheme = true) {
         MyApp()
-    }
-}
-
-@Composable
-fun CatCard(catModel: CatModel) {
-    Card(elevation = 12.dp) {
-        Text(text = catModel.catName)
     }
 }

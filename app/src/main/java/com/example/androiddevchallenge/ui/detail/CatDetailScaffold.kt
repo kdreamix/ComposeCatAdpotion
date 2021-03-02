@@ -82,9 +82,11 @@ fun CatDetailTopBar(catId: String, navController: NavController) {
     TopAppBar(
         title = { Text(cat!!.catName, color = DarkBlack) },
         navigationIcon = {
-            IconButton(onClick = {
-                navController.popBackStack()
-            }) {
+            IconButton(
+                onClick = {
+                    navController.popBackStack()
+                }
+            ) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
                     contentDescription = null,

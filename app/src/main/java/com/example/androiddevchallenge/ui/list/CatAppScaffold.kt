@@ -122,7 +122,6 @@ fun CatTopBar() {
                     style = typography.h5
                 )
             }
-
         },
         Modifier
 
